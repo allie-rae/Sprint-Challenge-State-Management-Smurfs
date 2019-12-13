@@ -1,10 +1,18 @@
-import { SMURF_FETCH_SUCCESS, SMURF_FETCH_FAIL, SMURF_FETCH_LOAD } from '../actions';
+import {
+    SMURF_FETCH_SUCCESS,
+    SMURF_FETCH_FAIL,
+    SMURF_FETCH_LOAD,
+    SMURF_POST_FAIL,
+    SMURF_POST_LOAD,
+    SMURF_POST_SUCCESS
+} from '../actions';
 
 
 const initialState = {
     smurfList: [],
     error: '',
-    isFetching: false
+    isFetching: false,
+    isPosting: false
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -24,6 +32,22 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: 'Mayday there has been an error'
+            }
+            case SMURF_POST_LOAD: 
+            return {
+                ...state,
+                isPosting: true
+            }
+            case SMURF_POST_SUCCESS:
+                return {
+                    ...state,
+                    smurfList: [...state.smurfList, action.payload],
+                    isPosting: false
+                }
+            case SMURF_POST_FAIL: 
+            return {
+                ...state,
+                error: 'Mayday post error'
             }
         default:
             return state;

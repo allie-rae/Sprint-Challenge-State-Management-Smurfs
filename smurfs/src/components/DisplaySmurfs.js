@@ -5,10 +5,10 @@ import { getSmurf } from '../actions';
 const DisplaySmurfs = (props) => {
     console.log(props)
     return <div>
-        <button onClick={() => props.getSmurf()}>Get Smurf</button>
+        <button onClick={() => props.getSmurf()}>Get Smurfs</button>
         {props.isFetching && <p>Fetching your smurfs...</p>}
         {props.smurfList && <div>
-            <ul>{props.smurfList.map(smurf => <li>{smurf.name}</li>)}</ul>
+            <ul>{props.smurfList.map(smurf => <li key={smurf.id}>{smurf.name}</li>)}</ul>
         </div>}
     </div>
 }
